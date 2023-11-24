@@ -1,0 +1,55 @@
+<div class="row mt-5 border border-2 rounded py-5 px-0 mx-0">
+
+  <!-- Profile Details -->
+  <div class="col-lg-4 col-md-6 mb-3">
+    <div>
+      <label class="fw-bold">Name : </label>
+      <span>{{ currentUserDetails.name }}</span>
+    </div>
+    <div>
+      <label class="fw-bold">User Name : </label>
+      <span>{{ currentUserDetails.username }}</span>
+    </div>
+    <div>
+      <label class="fw-bold">Posts : </label>
+      <span>{{ currentUserDetails.posts.length }}</span>
+    </div>
+  </div>
+
+  <!-- Contact Details -->
+  <div class="col-lg-4 col-md-6 mb-3 d-md-flex justify-content-center">
+    <div>
+      <div>
+        <label class="fw-bold">Email : </label>
+        <span>{{ currentUserDetails.email }}</span>
+      </div>
+      <div>
+        <label class="fw-bold">Phone : </label>
+        <span>{{ currentUserDetails.phone }}</span>
+      </div>
+      <div>
+        <label class="fw-bold">Website : </label>
+        <span>{{ currentUserDetails.website }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Address Details -->
+  <div class="col-lg-4 mb-3 d-md-flex justify-content-end">
+    <div>
+      <div>
+        <label class="fw-bold">City : </label>
+        <span>{{ currentUserDetails.address.city }}</span>
+      </div>
+      <div>
+        <label class="fw-bold">Company Street : </label>
+        <span>{{ currentUserDetails.address.street }}</span>
+      </div>
+      <div>
+        <label class="fw-bold">Zipcode : </label>
+        <span>{{ currentUserDetails.address.zipcode }}</span>
+      </div>
+    </div>
+  </div>
+
+</div>

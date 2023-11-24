@@ -1,0 +1,33 @@
+<div style="height: 100vh" class="container w-100 d-flex align-items-center justify-content-center">
+    <div class="d-flex align-items-center justify-content-center flex-column gap-3 border border-dark p-md-5 rounded shadow shadow-sm">
+      <h2>Directory</h2>
+
+      <!-- User list here -->
+      @if(!isLoading && (userListWithPost && userListWithPost.length)) {
+        <div>
+          <ol class="list-group list-group-numbered">
+
+                  <!-- Iterating on user list -->
+                  @for (user of userListWithPost; track user.id) {
+                    <li (click)="jumpToRoute(user.id)" class="cursor-pointer shadow shadow-sm list-group-item list-group-item-action d-flex align-items-start mb-2">
+                      <div class="ms-2 me-auto d-flex">
+                        <div>Name: </div>
+                        <div class="ms-2 ">{{user.name}}</div>
+                      </div> 
+                      <span class="ms-2">Post: </span>
+                      <span class="badge bg-secondary rounded-pill ms-2">
+                        {{user.posts.length}}
+                      </span>
+                    </li>
+                  }
+            </ol>
+        </div>
+      }
+      @else if (isLoading) {
+        <!-- Loader component -->
+        <div>
+          <app-loader />
+        </div>
+      }
+    </div>
+</div>

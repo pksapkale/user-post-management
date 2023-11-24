@@ -1,0 +1,6 @@
+<div class="d-flex align-items-stretch">
+  <div class="ms-auto border px-md-3 d-flex align-items-center">{{ currentTime }}</div>
+  <div class="ms-auto">
+    <button [ngClass]="timer ? 'btn-danger' : 'btn-success'" class="btn px-3" (click)="startStopWatch()">{{ !timer ? 'Start' : 'Stop' }}</button>
+  </div>
+</div>

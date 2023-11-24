@@ -1,0 +1,47 @@
+<div class="row mt-5">
+
+    <!-- Large and Medium Displays -->
+    <div class="d-none d-md-block">
+        <div class="row">
+            @for (post of currentUserDetails.posts; track post.id) {
+                <div class="col-lg-4 col-md-4 mb-3">
+                    <div class="card h-100" (click)="postClickHandler(post)">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ post.title }}</h5>
+                            <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
+                            <p class="card-text">{{ post.body }}</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Small Displays -->
+    <div class="row justify-content-center d-md-none m-0 p-0">
+        @for (post of currentUserDetails.posts; track post.id) {
+            <div class="col-sm-12 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ post.title }}</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
+                        <p class="card-text">{{ post.body }}</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<!-- Custom Modal Box -->
+@if (selectedPost) {
+    <div class="modal-wrapper">
+        <div class="bg-light w-50 p-3 rounded shadow shadow-lg position-relative">
+            <button (click)="selectedPost = null" class="btn-close position-absolute"
+                style="top: 15px; right: 15px;"></button>
+            <h3><span>{{ selectedPost.title }}</span></h3>
+            <p><span>{{ selectedPost.body }}</span></p>
+            <button (click)="selectedPost = null" class="btn btn-secondary btn-sm">Close</button>
+        </div>
+    </div>
+}
