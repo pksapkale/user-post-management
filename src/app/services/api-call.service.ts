@@ -19,11 +19,11 @@ export class ApiCallService {
 
   // Fetching country list
   fetchCountryList(){
-    return this._http.get('http://worldtimeapi.org/api/timezone');
+    return this._http.get('https://worldtimeapi.org/api/timezone');
   }
  
   // Fetching country current time
   fetchCountryTimeZone(countryStr: string){
-    return this._http.get('http://worldtimeapi.org/api/timezone/' + countryStr);
+    return this._http.get('https://worldtimeapi.org/api/timezone/' + countryStr);
   }
 }
