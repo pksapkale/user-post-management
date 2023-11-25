@@ -3,7 +3,7 @@
     <!-- Large and Medium Displays -->
     <div class="d-none d-md-block">
         <div class="row">
-            @for (post of currentUserDetails.posts; track post.id) {
+            @for (post of currentUserDetails().posts; track post.id) {
                 <div class="col-lg-4 col-md-4 mb-3">
                     <div class="card h-100" (click)="postClickHandler(post)">
                         <div class="card-body">
@@ -19,7 +19,7 @@
 
     <!-- Small Displays -->
     <div class="row justify-content-center d-md-none m-0 p-0">
-        @for (post of currentUserDetails.posts; track post.id) {
+        @for (post of currentUserDetails().posts; track post.id) {
             <div class="col-sm-12 mb-3">
                 <div class="card h-100" (click)="postClickHandler(post)">
                     <div class="card-body">

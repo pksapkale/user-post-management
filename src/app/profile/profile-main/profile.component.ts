@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoaderComponent } from '../../loader/loader.component';
 import { ProfileHelperService } from '../../services/profile-helper.service';
@@ -23,21 +23,22 @@ export class ProfileComponent implements OnInit {
   _directoryHelperService: DirectorHelperService = inject(DirectorHelperService);
   _route: ActivatedRoute = inject(ActivatedRoute);
   _router: Router = inject(Router);
+  
   isLoading: boolean = false;
   userListWithPost: any;
-  currentUserDetails: any;
-  currentUserId: string = '';
-  countryList: any = [];
   currentTimeObj: any = {};
   selectedCountry: any = 'Asia/Kolkata';
+  currentUserId: string = '';
+  countryList = signal<any>(null);
+  currentUserDetails = signal<null | any[]>(null);
 
   async ngOnInit() {
     try {
       this.isLoading = true;
       this.currentUserId = this._route.snapshot.params['user_id'];
       this.userListWithPost = await this._directoryHelperService.getUserDataWithPost(); // Getting user list with corresponding posts
-      [this.currentUserDetails] = this.userListWithPost.filter((e: any) => e.id == this.currentUserId);
-      this.countryList = await this._profileHelperService.getCountryList(); // Getting country list
+      this.currentUserDetails.set(this.userListWithPost.filter((e: any) => e.id == this.currentUserId)[0]);
+      this.countryList.set(await this._profileHelperService.getCountryList()); // Getting country list
       this.isLoading = false;
     } catch (e) {
       this.isLoading = false;

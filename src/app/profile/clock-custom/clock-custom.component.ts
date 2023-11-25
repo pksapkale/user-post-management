@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './clock-custom.component.css'
 })
 export class ClockCustomComponent implements OnInit, OnChanges, OnDestroy {
-  currentTime: string = '00:00:00';
+  currentTime = signal<string>('00:00:00');
   timer: any;
 
   @Input() currentTimeObj: any;
@@ -45,12 +45,12 @@ export class ClockCustomComponent implements OnInit, OnChanges, OnDestroy {
   // For getting current time string
   getTimeFromObj() {
     this.pause();
-    this.currentTime = this.getCurrentTimeWithOffset(this.currentTimeObj.utc_offset);
+    this.currentTime.set(this.getCurrentFromWithOffset(this.currentTimeObj.utc_offset));
     this.start();
   }
 
   // Getting current time with offset
-  getCurrentTimeWithOffset(utcOffset: string) {
+  getCurrentFromWithOffset(utcOffset: string) {
     // Split the UTC offset into hours and minutes
     const [hoursString, minutesString] = utcOffset.split(':');
     const currentUTCOffset = new Date().getTimezoneOffset() * 60 * 1000;
@@ -104,7 +104,7 @@ export class ClockCustomComponent implements OnInit, OnChanges, OnDestroy {
 
   // For updating time
   updateTime() {
-    let timeParts = this.currentTime.split(':');
+    let timeParts = this.currentTime().split(':');
     let hours = parseInt(timeParts[0], 10);
     let minutes = parseInt(timeParts[1], 10);
     let seconds = parseInt(timeParts[2], 10);
@@ -122,7 +122,7 @@ export class ClockCustomComponent implements OnInit, OnChanges, OnDestroy {
         }
       }
     }
-    this.currentTime = `${hours < 10 ? '0' + hours : hours}:${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`; // Setting current time here
+    this.currentTime.set(`${hours < 10 ? '0' + hours : hours}:${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`); // Setting current time here
   }
 
   // Killing the process on component destroy
